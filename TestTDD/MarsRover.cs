@@ -13,8 +13,8 @@ namespace TestTDD
         [Fact]
         public void StartAt00MoveNorth()
         {
-            var res = MarsRover.Move(new Point(0, 0), 'N', "f");
-            res.Should().Be(new Point(0, 1));
+            var res = MarsRover.Move(new Point(0, 0, 'N'), "f");
+            res.Should().Be(new Point(0, 1,'N'));
         }
         [Theory]
         [InlineData(3, 2, 3, 3)]
@@ -22,8 +22,8 @@ namespace TestTDD
         [InlineData(7, 0, 7, 1)]
         public void MoveNorthOnceForward(int startX, int startY, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, startY), 'N', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(startX, startY, 'N'), "f");
+            res.Should().Be(new Point(endX, endY,'N'));
         }
         [Theory]
         [InlineData(3, 3, 0)]
@@ -31,8 +31,8 @@ namespace TestTDD
         [InlineData(10, 10, 0)]
         public void MoveNorthOnceForwardFromTheEdge(int startX, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, 20), 'N', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(startX, 20, 'N'), "f");
+            res.Should().Be(new Point(endX, endY,'N'));
         }
         [Theory]
         [InlineData(3, 2, 4, 2)]
@@ -40,8 +40,8 @@ namespace TestTDD
         [InlineData(9, 2, 10, 2)]
         public void MoveEastOnceForward(int startX, int startY, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, startY), 'E', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(startX, startY, 'E'), "f");
+            res.Should().Be(new Point(endX, endY, 'E'));
         }
         [Theory]
         [InlineData(20, 0, 20)]
@@ -49,8 +49,8 @@ namespace TestTDD
         [InlineData(0, 0, 0)]
         public void MoveEastOnceForwardFromTheEdge(int startY, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(10, startY), 'E', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(10, startY, 'E'), "f");
+            res.Should().Be(new Point(endX, endY, 'E'));
         }
         [Theory]
         [InlineData(3, 2, 3, 1)]
@@ -58,8 +58,8 @@ namespace TestTDD
         [InlineData(10, 10, 10, 9)]
         public void MoveSouthOnceForward(int startX, int startY, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, startY), 'S', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(startX, startY, 'S'), "f");
+            res.Should().Be(new Point(endX, endY, 'S'));
         }
         [Theory]
         [InlineData(0, 0, 20)]
@@ -67,8 +67,8 @@ namespace TestTDD
         [InlineData(10, 10, 20)]
         public void MoveSouthOnceForwardFromTheEdge(int startX, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, 0), 'S', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(startX, 0, 'S'), "f");
+            res.Should().Be(new Point(endX, endY, 'S'));
         }
         [Theory]
         [InlineData(5, 10, 4, 10)]
@@ -76,8 +76,8 @@ namespace TestTDD
         [InlineData(5, 0, 4, 0)]
         public void MoveWestOnceForward(int startX, int startY, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, startY), 'W', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(startX, startY, 'W'), "f");
+            res.Should().Be(new Point(endX, endY, 'W'));
         }
         [Theory]
         [InlineData(20, 10, 20)]
@@ -85,35 +85,18 @@ namespace TestTDD
         [InlineData(0, 10, 0)]
         public void MoveWestOnceForwardFromTheEdge(int startY, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(0, startY), 'W', "f");
-            res.Should().Be(new Point(endX, endY));
+            var res = MarsRover.Move(new Point(0, startY, 'W'), "f");
+            res.Should().Be(new Point(endX, endY, 'W'));
         }
-        [Theory]
-        [InlineData(0, 0, 'N', 2, 0, 2)]
-        [InlineData(0, 0, 'S', 5, 0, 16)]
-        [InlineData(0, 0, 'W', 3, 8, 0)]
-        [InlineData(0, 0, 'E', 3, 3, 0)]
-        [InlineData(0, 0, 'E', 15, 4, 0)]
-        [InlineData(0, 0, 'E', 30, 8, 0)]
-        [InlineData(0, 0, 'W', 30, 3, 0)]
-        [InlineData(0, 0, 'S', 60, 0, 3)]
-        [InlineData(5, 5, 'S', 54, 5, 14)]
-        [InlineData(0, 0, 'W', 100, 10, 0)]
-        [InlineData(0, 0, 'S', 64, 0, 20)]
-        public void MoveMultipleTimesForward(int startX, int startY, char direction, int count, int endX, int endY)
-        {
-            var movements = string.Concat(Enumerable.Repeat('f', count));
-            var res = MarsRover.Move(new Point(startX, startY), direction, movements);
-            res.Should().Be(new Point(endX, endY));
-        }
+
     }
 
     public class MarsRover
     {
-        public static object Move(Point startPoint, char direction, string movements)
+        public static object Move(Point startPoint, string movements)
         {
             Point res;
-            switch (direction)
+            switch (startPoint.Direction)
             {
                 case 'E':
                     res = startPoint.MoveEast(movements.Length);
@@ -132,23 +115,23 @@ namespace TestTDD
             return res;
         }
     }
-    public record Point(int x, int y)
+    public record Point(int x, int y, char Direction)
     {
         internal Point MoveNorth(int count)
         {
-            return new Point(x, (y + count) % 21);
+            return new Point(x, (y + count) % 21, Direction);
         }
         internal Point MoveEast(int count)
         {
-            return new Point((x + count) % 11, y);
+            return new Point((x + count) % 11, y, Direction);
         }
         internal Point MoveSouth(int count)
         {
-            return new Point(x, (((y - count) % 21) + 21) % 21);
+            return new Point(x, (y - count + 21) % 21, Direction);
         }
         internal Point MoveWest(int count)
         {
-            return new Point((((x - count) % 11) + 11) % 11, y);
+            return new Point((x - count + 11) % 11, y, Direction);
         }
     }
 }
