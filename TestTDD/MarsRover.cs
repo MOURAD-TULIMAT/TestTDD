@@ -134,52 +134,31 @@ namespace TestTDD
             if (movements == "r")
             {
                 var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
-                res = new Point(startPoint.x, startPoint.y, newDirection);
+                res = new Point(startPoint.X, startPoint.Y, newDirection);
             }
             else if (movements == "l")
             {
                 var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) - 1 + 4) % 4);
-                res = new Point(startPoint.x, startPoint.y, newDirection);
+                res = new Point(startPoint.X, startPoint.Y, newDirection);
             }
             else
             {
-                switch (startPoint.Direction)
-                {
-                    case 'E':
-                        res = startPoint.MoveEast(movements.Length);
-                        break;
-                    case 'S':
-                        res = startPoint.MoveSouth(movements.Length);
-                        break;
-                    case 'N':
-                        res = startPoint.MoveNorth(movements.Length);
-                        break;
-                    default:
-                        res = startPoint.MoveWest(movements.Length);
-                        break;
-                }
+                res = startPoint.MoveInDirection();
             }
 
             return res;
         }
     }
-    public record Point(int x, int y, char Direction)
+    public record Point(int X, int Y, char Direction)
     {
-        internal Point MoveNorth(int count)
-        {
-            return new Point(x, (y + count) % 21, Direction);
-        }
-        internal Point MoveEast(int count)
-        {
-            return new Point((x + count) % 11, y, Direction);
-        }
-        internal Point MoveSouth(int count)
-        {
-            return new Point(x, (y - count + 21) % 21, Direction);
-        }
-        internal Point MoveWest(int count)
-        {
-            return new Point((x - count + 11) % 11, y, Direction);
-        }
+        public Point MoveInDirection() =>
+            Direction switch
+            {
+                'N' => new Point(X, (Y + 1) % 21, Direction),
+                'E' => new Point((X + 1) % 11, Y, Direction),
+                'S' => new Point(X, (Y +20) % 21, Direction),
+                'W' => new Point((X + 10) % 11, Y, Direction),
+                _ => this
+            };
     }
 }
