@@ -98,9 +98,12 @@ namespace TestTDD
         [InlineData(0, 0, 'W', 30, 3, 0)] 
         [InlineData(0, 0, 'S', 60, 0, 3)] 
         [InlineData(5, 5, 'S', 54, 5, 14)]
+        [InlineData(0, 0, 'W', 100, 10, 0)]
+        [InlineData(0, 0, 'S', 64, 0, 20)]
         public void MoveMultipleTimesForward(int startX, int startY, char direction, int count, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, startY), direction, string.Concat(Enumerable.Repeat('f', count)));
+            var movements = string.Concat(Enumerable.Repeat('f', count));
+            var res = MarsRover.Move(new Point(startX, startY), direction, movements);
             res.Should().Be(new Point(endX, endY));
         }
     }
