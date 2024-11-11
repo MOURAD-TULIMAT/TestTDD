@@ -64,7 +64,7 @@ namespace TestTDD
         [Theory]
         [InlineData(0, 0, 20)]
         [InlineData(5, 5, 20)]
-        [InlineData(10, 5, 20)]
+        [InlineData(10, 10, 20)]
         public void MoveSouthOnceForwardFromTheEdge(int startX, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, 0), 'S', "f");
@@ -76,12 +76,12 @@ namespace TestTDD
     {
         public static object Move(Point startPoint, char direction, string movements)
         {
-            if ((startPoint, direction, movements) == (new Point(0, 0), 'S', "f"))
-                return new Point(0, 20);
-            if ((startPoint, direction, movements) == (new Point(5, 0), 'S', "f"))
-                return new Point(5, 20);
-            if ((startPoint, direction, movements) == (new Point(10, 0), 'S', "f"))
-                return new Point(10, 20);
+            //if ((startPoint, direction, movements) == (new Point(0, 0), 'S', "f"))
+            //    return new Point(0, 20);
+            //if ((startPoint, direction, movements) == (new Point(5, 0), 'S', "f"))
+            //    return new Point(5, 20);
+            //if ((startPoint, direction, movements) == (new Point(10, 0), 'S', "f"))
+            //    return new Point(10, 20);
             Point res;
             if (direction == 'E')
                 res = startPoint.MoveEast();
@@ -104,7 +104,7 @@ namespace TestTDD
         }
         internal Point MoveSouth()
         {
-            return new Point(x, y - 1);
+            return new Point(x, ((y - 1) + 21 ) % 21);
         }
     }
 }
