@@ -91,6 +91,8 @@ namespace TestTDD
         [Theory]
         [InlineData(0, 0, 'N', "ff", 0, 2)]
         [InlineData(0, 0, 'S', "fffff", 0, 16)]
+        [InlineData(0, 0, 'W', "fff", 8, 0)]
+        [InlineData(0, 0, 'E', "fff", 3, 0)]
         public void MoveMultipleTimesForward(int startX, int startY, char direction, string movements, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY), direction, movements);
@@ -106,7 +108,7 @@ namespace TestTDD
             switch (direction)
             {
                 case 'E':
-                    res = startPoint.MoveEast();
+                    res = startPoint.MoveEast(movements.Length);
                     break;
                 case 'S':
                     res = startPoint.MoveSouth(movements.Length);
@@ -115,7 +117,7 @@ namespace TestTDD
                     res = startPoint.MoveNorth(movements.Length);
                     break;
                 default:
-                    res = startPoint.MoveWest();
+                    res = startPoint.MoveWest(movements.Length);
                     break;
             }
 
@@ -128,17 +130,17 @@ namespace TestTDD
         {
             return new Point(x, (y + count) % 21);
         }
-        internal Point MoveEast()
+        internal Point MoveEast(int count)
         {
-            return new Point((x + 1) % 11, y);
+            return new Point((x + count) % 11, y);
         }
         internal Point MoveSouth(int count)
         {
             return new Point(x, ((y - count) + 21) % 21);
         }
-        internal Point MoveWest()
+        internal Point MoveWest(int count)
         {
-            return new Point((x - 1 + 11) % 11, y);
+            return new Point((x - count + 11) % 11, y);
         }
     }
 }
