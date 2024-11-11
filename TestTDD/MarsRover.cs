@@ -88,6 +88,13 @@ namespace TestTDD
             var res = MarsRover.Move(new Point(0, startY), 'W', "f");
             res.Should().Be(new Point(endX, endY));
         }
+        [Theory]
+        [InlineData(0, 0, 'N', "ff", 0, 2)]
+        public void MoveMultipleTimesForward(int startX, int startY, char direction, string movements, int endX, int endY)
+        {
+            var res = MarsRover.Move(new Point(startX, startY), direction, movements);
+            res.Should().Be(new Point(endX, endY));
+        }
     }
 
     public class MarsRover
