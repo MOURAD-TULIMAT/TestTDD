@@ -67,15 +67,17 @@ namespace TestTDD
     {
         public static object Move(Point startPoint, char direction, string movements)
         {
-            if ((startPoint, direction, movements) == (new Point(3, 2), 'S', "f"))
-                return new Point(3,1);
-            if ((startPoint, direction, movements) == (new Point(0, 10), 'S', "f"))
-                return new Point(0, 9);
-            if ((startPoint, direction, movements) == (new Point(10, 10), 'S', "f"))
-                return new Point(10, 9);
+            //if ((startPoint, direction, movements) == (new Point(3, 2), 'S', "f"))
+            //    return new Point(3,1);
+            //if ((startPoint, direction, movements) == (new Point(0, 10), 'S', "f"))
+            //    return new Point(0, 9);
+            //if ((startPoint, direction, movements) == (new Point(10, 10), 'S', "f"))
+            //    return new Point(10, 9);
             Point res;
             if (direction == 'E')
                 res = startPoint.MoveEast();
+            else if (direction == 'S')
+                res = startPoint.MoveSouth();
             else
                 res = startPoint.MoveNorth();
             return res;
@@ -90,6 +92,10 @@ namespace TestTDD
         internal Point MoveEast()
         {
             return new Point((x + 1) % 11, y);
+        }
+        internal Point MoveSouth()
+        {
+            return new Point(x, y - 1);
         }
     }
 }
