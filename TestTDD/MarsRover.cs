@@ -16,6 +16,13 @@ namespace TestTDD
             var res = MarsRover.Move(new Point(0,0),'N', "f");
             res.Should().Be(new Point(0, 1));
         }
+        [Theory]
+        [InlineData(3,2,3,3)]
+        public void MoveNorthOnce(int startX, int startY, int endX, int endY)
+        {
+            var res = MarsRover.Move(new Point(startX, startY), 'N', "f");
+            res.Should().Be(new Point(endX, endY));
+        }
     }
 
     public class MarsRover
