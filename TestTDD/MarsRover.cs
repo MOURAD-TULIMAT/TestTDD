@@ -89,18 +89,18 @@ namespace TestTDD
             res.Should().Be(new Point(endX, endY));
         }
         [Theory]
-        [InlineData(0, 0, 'N', "ff", 0, 2)]
-        [InlineData(0, 0, 'S', "fffff", 0, 16)]
-        [InlineData(0, 0, 'W', "fff", 8, 0)]
-        [InlineData(0, 0, 'E', "fff", 3, 0)]
-        [InlineData(0, 0, 'E', "fffffffffffffff", 4, 0)] // 15 f
-        [InlineData(0, 0, 'E', "ffffffffffffffffffffffffffffff", 8, 0)] // 30 f
-        [InlineData(0, 0, 'W', "ffffffffffffffffffffffffffffff", 3, 0)] // 30 f
-        [InlineData(0, 0, 'S', "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", 0, 4)] // 60 f
-        [InlineData(5, 5, 'S', "fffffffffffffffffffffffffffffffffffffffffffffffffffff", 5, 15)] // 54 f
-        public void MoveMultipleTimesForward(int startX, int startY, char direction, string movements, int endX, int endY)
+        [InlineData(0, 0, 'N', 2, 0, 2)]
+        [InlineData(0, 0, 'S', 5, 0, 16)]
+        [InlineData(0, 0, 'W', 3, 8, 0)]
+        [InlineData(0, 0, 'E', 3, 3, 0)]
+        [InlineData(0, 0, 'E', 15, 4, 0)]
+        [InlineData(0, 0, 'E', 30, 8, 0)] 
+        [InlineData(0, 0, 'W', 30, 3, 0)] 
+        [InlineData(0, 0, 'S', 60, 0, 3)] 
+        [InlineData(5, 5, 'S', 54, 5, 14)]
+        public void MoveMultipleTimesForward(int startX, int startY, char direction, int count, int endX, int endY)
         {
-            var res = MarsRover.Move(new Point(startX, startY), direction, movements);
+            var res = MarsRover.Move(new Point(startX, startY), direction, string.Concat(Enumerable.Repeat('f', count)));
             res.Should().Be(new Point(endX, endY));
         }
     }
