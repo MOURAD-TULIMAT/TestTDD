@@ -92,6 +92,8 @@ namespace TestTDD
         [Theory]
         [InlineData('N','E')]
         [InlineData('E','S')]
+        [InlineData('S','W')]
+        [InlineData('W','N')]
         public void TestRotatingToTheRight(char direction, char expected)
         {
             var res = MarsRover.Move(new Point(0, 0, direction), "r");
@@ -107,6 +109,10 @@ namespace TestTDD
                 return new Point(startPoint.x, startPoint.y, 'E');
             if (movements == "r" && startPoint.Direction == 'E')
                 return new Point(startPoint.x, startPoint.y, 'S');
+            if (movements == "r" && startPoint.Direction == 'S')
+                return new Point(startPoint.x, startPoint.y, 'W');
+            if (movements == "r" && startPoint.Direction == 'W')
+                return new Point(startPoint.x, startPoint.y, 'N');
             Point res;
             switch (startPoint.Direction)
             {
