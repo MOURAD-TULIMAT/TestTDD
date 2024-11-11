@@ -93,6 +93,8 @@ namespace TestTDD
         [InlineData(0, 0, 'S', "fffff", 0, 16)]
         [InlineData(0, 0, 'W', "fff", 8, 0)]
         [InlineData(0, 0, 'E', "fff", 3, 0)]
+        [InlineData(0, 0, 'E', "fffffffffffffff", 4, 0)] // 15 f
+        [InlineData(0, 0, 'E', "ffffffffffffffffffffffffffffff", 8, 0)] // 30 f
         public void MoveMultipleTimesForward(int startX, int startY, char direction, string movements, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY), direction, movements);
