@@ -14,7 +14,7 @@ namespace TestTDD
         public void StartAt00MoveNorth()
         {
             var res = MarsRover.Move(new Point(0, 0, 'N'), "f");
-            res.Should().Be(new Point(0, 1,'N'));
+            res.Should().Be(new Point(0, 1, 'N'));
         }
         [Theory]
         [InlineData(3, 2, 3, 3)]
@@ -23,7 +23,7 @@ namespace TestTDD
         public void MoveNorthOnceForward(int startX, int startY, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY, 'N'), "f");
-            res.Should().Be(new Point(endX, endY,'N'));
+            res.Should().Be(new Point(endX, endY, 'N'));
         }
         [Theory]
         [InlineData(3, 3, 0)]
@@ -32,7 +32,7 @@ namespace TestTDD
         public void MoveNorthOnceForwardFromTheEdge(int startX, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, 20, 'N'), "f");
-            res.Should().Be(new Point(endX, endY,'N'));
+            res.Should().Be(new Point(endX, endY, 'N'));
         }
         [Theory]
         [InlineData(3, 2, 4, 2)]
@@ -90,10 +90,10 @@ namespace TestTDD
         }
 
         [Theory]
-        [InlineData('N','E')]
-        [InlineData('E','S')]
-        [InlineData('S','W')]
-        [InlineData('W','N')]
+        [InlineData('N', 'E')]
+        [InlineData('E', 'S')]
+        [InlineData('S', 'W')]
+        [InlineData('W', 'N')]
         public void TestRotatingToTheRight(char direction, char expected)
         {
             var res = MarsRover.Move(new Point(0, 0, direction), "r");
@@ -103,6 +103,7 @@ namespace TestTDD
 
     public class MarsRover
     {
+        private readonly char[] directions = ['N', 'E', 'S', 'W'];
         public static object Move(Point startPoint, string movements)
         {
             if (movements == "r" && startPoint.Direction == 'N')
