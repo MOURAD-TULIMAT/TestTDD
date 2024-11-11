@@ -56,10 +56,10 @@ namespace TestTDD
             //if ((startPoint, direction, movements) == (new Point(10, 2), 'E', "f"))
             //    return new Point(11, 0);
             Point res;
-            if(direction == 'E')
+            if (direction == 'E')
                 res = startPoint.MoveEast();
             else
-            res = startPoint.MoveNorth();
+                res = startPoint.MoveNorth();
             return res;
         }
     }
@@ -67,7 +67,7 @@ namespace TestTDD
     {
         internal Point MoveNorth()
         {
-            return new Point(x, (y+1) % 21);
+            return new Point(x, (y + 1) % 21);
         }
         internal Point MoveEast()
         {
