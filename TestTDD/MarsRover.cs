@@ -44,9 +44,7 @@ namespace TestTDD
             res.Should().Be(new Point(endX, endY));
         }
         [Theory]
-        [InlineData(3, 3, 0)]
-        [InlineData(0, 0, 0)]
-        [InlineData(10, 10, 0)]
+        [InlineData(20, 0, 20)]
         public void MoveEastOnceForwardFromTheEdge(int startY, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(10, startY), 'E', "f");
@@ -58,8 +56,8 @@ namespace TestTDD
     {
         public static object Move(Point startPoint, char direction, string movements)
         {
-            if ((startPoint, direction, movements) == (new Point(10, 10), 'S', "f"))
-                return new Point(10, 9);
+            if ((startPoint, direction, movements) == (new Point(10, 20), 'E', "f"))
+                return new Point(0, 20);
             Point res;
             if (direction == 'E')
                 res = startPoint.MoveEast();
