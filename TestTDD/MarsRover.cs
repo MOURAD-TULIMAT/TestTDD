@@ -103,32 +103,33 @@ namespace TestTDD
 
     public class MarsRover
     {
-        private readonly char[] directions = ['N', 'E', 'S', 'W'];
-        public static object Move(Point startPoint, string movements)
+        private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
+        public static Point Move(Point startPoint, string movements)
         {
-            if (movements == "r" && startPoint.Direction == 'N')
-                return new Point(startPoint.x, startPoint.y, 'E');
-            if (movements == "r" && startPoint.Direction == 'E')
-                return new Point(startPoint.x, startPoint.y, 'S');
-            if (movements == "r" && startPoint.Direction == 'S')
-                return new Point(startPoint.x, startPoint.y, 'W');
-            if (movements == "r" && startPoint.Direction == 'W')
-                return new Point(startPoint.x, startPoint.y, 'N');
+
             Point res;
-            switch (startPoint.Direction)
+            if (movements == "r")
             {
-                case 'E':
-                    res = startPoint.MoveEast(movements.Length);
-                    break;
-                case 'S':
-                    res = startPoint.MoveSouth(movements.Length);
-                    break;
-                case 'N':
-                    res = startPoint.MoveNorth(movements.Length);
-                    break;
-                default:
-                    res = startPoint.MoveWest(movements.Length);
-                    break;
+                var newDirection = directions.ElementAt(directions.IndexOf(startPoint.Direction));
+                res = new Point(startPoint.x, startPoint.y, newDirection);
+            }
+            else
+            {
+                switch (startPoint.Direction)
+                {
+                    case 'E':
+                        res = startPoint.MoveEast(movements.Length);
+                        break;
+                    case 'S':
+                        res = startPoint.MoveSouth(movements.Length);
+                        break;
+                    case 'N':
+                        res = startPoint.MoveNorth(movements.Length);
+                        break;
+                    default:
+                        res = startPoint.MoveWest(movements.Length);
+                        break;
+                }
             }
 
             return res;
