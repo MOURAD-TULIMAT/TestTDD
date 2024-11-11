@@ -40,12 +40,12 @@ namespace TestTDD
     {
         public static object Move(Point startPoint, char direction, string movements)
         {
-            if ((startPoint, direction, movements) == (new Point(3, 20), 'N', "f"))
-                return new Point(3, 0);
-            if ((startPoint, direction, movements) == (new Point(0, 20), 'N', "f"))
-                return new Point(0, 0);
-            if ((startPoint, direction, movements) == (new Point(10, 20), 'N', "f"))
-                return new Point(10, 0);
+            //if ((startPoint, direction, movements) == (new Point(3, 20), 'N', "f"))
+            //    return new Point(3, 0);
+            //if ((startPoint, direction, movements) == (new Point(0, 20), 'N', "f"))
+            //    return new Point(0, 0);
+            //if ((startPoint, direction, movements) == (new Point(10, 20), 'N', "f"))
+            //    return new Point(10, 0);
             var res = startPoint.MoveNorth();
             return res;
         }
@@ -54,7 +54,7 @@ namespace TestTDD
     {
         internal Point MoveNorth()
         {
-            return new Point(this.x, this.y+1);
+            return new Point(this.x, (this.y+1) % 21);
         }
     }
 }
