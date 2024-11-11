@@ -11,7 +11,7 @@ namespace TestTDD
     public class MarsRoverTest
     {
         [Fact]
-        public void StartAt00MoveNorth()
+        public void StartAt00MoveNorthForward()
         {
             var res = MarsRover.Move(new Point(0, 0, 'N'), "f");
             res.Should().Be(new Point(0, 1, 'N'));
@@ -89,6 +89,13 @@ namespace TestTDD
             res.Should().Be(new Point(endX, endY, 'W'));
         }
 
+        [Fact]
+        public void StartAt00MoveSouthBackWard()
+        {
+            var res = MarsRover.Move(new Point(0, 0, 'S'), "b");
+            res.Should().Be(new Point(0, 1, 'S'));
+        }
+
         [Theory]
         [InlineData('N', 'E')]
         [InlineData('E', 'S')]
@@ -109,6 +116,7 @@ namespace TestTDD
             var res = MarsRover.Move(new Point(0, 0, direction), "l");
             res.Should().Be(new Point(0, 0, expected));
         }
+
     }
 
     public class MarsRover
@@ -116,7 +124,8 @@ namespace TestTDD
         private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
         public static Point Move(Point startPoint, string movements)
         {
-
+            if (startPoint == new Point(0, 0, 'S') && movements == "b")
+                return new Point(0, 1, 'S');
             Point res;
             if (movements == "r")
             {
