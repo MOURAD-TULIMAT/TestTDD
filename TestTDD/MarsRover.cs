@@ -111,7 +111,7 @@ namespace TestTDD
                     res = startPoint.MoveSouth();
                     break;
                 case 'N':
-                    res = startPoint.MoveNorth();
+                    res = startPoint.MoveNorth(movements.Length);
                     break;
                 default:
                     res = startPoint.MoveWest();
@@ -123,9 +123,9 @@ namespace TestTDD
     }
     public record Point(int x, int y)
     {
-        internal Point MoveNorth()
+        internal Point MoveNorth(int count)
         {
-            return new Point(x, (y + 1) % 21);
+            return new Point(x, (y + count) % 21);
         }
         internal Point MoveEast()
         {
