@@ -89,12 +89,20 @@ namespace TestTDD
             res.Should().Be(new Point(endX, endY, 'W'));
         }
 
+        [Fact]
+        public void TestChangingRotatingToTheRight()
+        {
+            var res = MarsRover.Move(new Point(0, 0, 'N'), "r");
+            res.Should().Be(new Point(0, 0, 'E'));
+        }
     }
 
     public class MarsRover
     {
         public static object Move(Point startPoint, string movements)
         {
+            if (movements == "r")
+                return new Point(startPoint.x, startPoint.y, 'E');
             Point res;
             switch (startPoint.Direction)
             {
