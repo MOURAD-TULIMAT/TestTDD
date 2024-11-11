@@ -94,7 +94,7 @@ namespace TestTDD
         [InlineData(0, 0, 'N', 0, 20)]
         [InlineData(0, 0, 'W', 1, 0)]
         [InlineData(0, 0, 'E', 10, 0)]
-        public void MoveWestOnceBackwards(int startX, int startY, char direction, int endX, int endY)
+        public void MoveOnceBackwards(int startX, int startY, char direction, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY, direction), "b");
             res.Should().Be(new Point(endX, endY, direction));
@@ -121,6 +121,14 @@ namespace TestTDD
             res.Should().Be(new Point(0, 0, expected));
         }
 
+        [Theory]
+        [InlineData(0, 0, 'w', "rf", 0, 1)]
+        public void TwoMovements(int startX, int startY, char direction, string movements, int endX, int endY)
+        {
+            var res = MarsRover.Move(new Point(startX, startY, direction), movements);
+            res.Should().Be(new Point(endX, endY, direction));
+        }
+
     }
 
     public class MarsRover
@@ -129,6 +137,7 @@ namespace TestTDD
         public static Point Move(Point startPoint, string movements)
         {
             Point res;
+
             if (movements == "r")
             {
                 var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
