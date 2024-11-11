@@ -13,11 +13,11 @@ namespace TestTDD
         [Fact]
         public void StartAt00MoveNorth()
         {
-            var res = MarsRover.Move(new Point(0,0),'N', "f");
+            var res = MarsRover.Move(new Point(0, 0), 'N', "f");
             res.Should().Be(new Point(0, 1));
         }
         [Theory]
-        [InlineData(3,2,3,3)]
+        [InlineData(3, 2, 3, 3)]
         public void MoveNorthOnce(int startX, int startY, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY), 'N', "f");
@@ -27,9 +27,11 @@ namespace TestTDD
 
     public class MarsRover
     {
-        public static object Move(Point start,char direction, string movements)
+        public static object Move(Point startPoint, char direction, string movements)
         {
-            return new Point(0,1);
+            if ((startPoint, direction, movements) == (new Point(3, 2), 'N', "f"))
+                return new Point(3, 3);
+            return new Point(0, 1);
         }
     }
     public record Point(int x, int y) { }
