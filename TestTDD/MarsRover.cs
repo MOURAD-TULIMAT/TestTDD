@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentAssertions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,17 @@ namespace TestTDD
         [Fact]
         public void StartAt00MoveNorth()
         {
-            var res = MarsRover.Move();
+            var res = MarsRover.Move(new Point(0,0),'N', "f");
+            res.Should().Be(new Point(0, 1));
         }
     }
 
     public class MarsRover
     {
-        public static object Move()
+        public static object Move(Point start,char direction, string movements)
         {
             throw new NotImplementedException();
         }
     }
+    public record Point(int x, int y) { }
 }
