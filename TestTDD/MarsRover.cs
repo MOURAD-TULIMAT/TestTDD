@@ -54,6 +54,8 @@ namespace TestTDD
         }
         [Theory]
         [InlineData(3, 2, 3, 1)]
+        [InlineData(0, 10, 0, 9)]
+        [InlineData(10, 10, 10, 9)]
         public void MoveSouthOnceForward(int startX, int startY, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY), 'S', "f");
@@ -67,6 +69,10 @@ namespace TestTDD
         {
             if ((startPoint, direction, movements) == (new Point(3, 2), 'S', "f"))
                 return new Point(3,1);
+            if ((startPoint, direction, movements) == (new Point(0, 10), 'S', "f"))
+                return new Point(0, 9);
+            if ((startPoint, direction, movements) == (new Point(10, 10), 'S', "f"))
+                return new Point(10, 9);
             Point res;
             if (direction == 'E')
                 res = startPoint.MoveEast();
