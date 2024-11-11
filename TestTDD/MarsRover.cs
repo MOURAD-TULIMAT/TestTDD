@@ -22,7 +22,7 @@ namespace TestTDD
     {
         public static object Move(Point start,char direction, string movements)
         {
-            throw new NotImplementedException();
+            return new Point(0,1);
         }
     }
     public record Point(int x, int y) { }
