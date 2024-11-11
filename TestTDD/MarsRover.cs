@@ -20,7 +20,7 @@ namespace TestTDD
         [InlineData(3, 2, 3, 3)]
         [InlineData(4, 4, 4, 5)]
         [InlineData(7, 0, 7, 1)]
-        public void MoveNorthOnce(int startX, int startY, int endX, int endY)
+        public void MoveNorthOnceForward(int startX, int startY, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY), 'N', "f");
             res.Should().Be(new Point(endX, endY));
@@ -29,9 +29,16 @@ namespace TestTDD
         [InlineData(3, 3, 0)]
         [InlineData(0, 0, 0)]
         [InlineData(10, 10, 0)]
-        public void MoveNorthOncefromTheEdge(int startX, int endX, int endY)
+        public void MoveNorthOnceForwardfromTheEdge(int startX, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, 20), 'N', "f");
+            res.Should().Be(new Point(endX, endY));
+        }
+        [Theory]
+        [InlineData(3, 2, 4, 2)]
+        public void MoveEastOnceForward(int startX, int startY, int endX, int endY)
+        {
+            var res = MarsRover.Move(new Point(startX, startY), 'E', "f");
             res.Should().Be(new Point(endX, endY));
         }
     }
