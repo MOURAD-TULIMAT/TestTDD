@@ -126,10 +126,6 @@ namespace TestTDD
         private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
         public static Point Move(Point startPoint, string movements)
         {
-            if (startPoint == new Point(0, 0, 'S') && movements == "b")
-                return new Point(0, 1, 'S');
-            if (startPoint == new Point(0, 0, 'N') && movements == "b")
-                return new Point(0, 20, 'N');
             Point res;
             if (movements == "r")
             {
@@ -143,7 +139,7 @@ namespace TestTDD
             }
             else
             {
-                res = startPoint.MoveInDirection();
+                res = startPoint.MoveInDirection(movements[0] == 'b');
             }
 
             return res;
@@ -151,14 +147,26 @@ namespace TestTDD
     }
     public record Point(int X, int Y, char Direction)
     {
-        public Point MoveInDirection() =>
+        public Point MoveInDirection(bool isBackwards) =>
+            isBackwards ?
             Direction switch
             {
+
+                'S' => new Point(X, (Y + 1) % 21, Direction),
+                'W' => new Point((X + 1) % 11, Y, Direction),
+                'N' => new Point(X, (Y + 20) % 21, Direction),
+                'E' => new Point((X + 10) % 11, Y, Direction),
+                _ => this
+            } :
+            Direction switch
+            {
+
                 'N' => new Point(X, (Y + 1) % 21, Direction),
                 'E' => new Point((X + 1) % 11, Y, Direction),
-                'S' => new Point(X, (Y +20) % 21, Direction),
+                'S' => new Point(X, (Y + 20) % 21, Direction),
                 'W' => new Point((X + 10) % 11, Y, Direction),
                 _ => this
-            };
+            }
+            ;
     }
 }
