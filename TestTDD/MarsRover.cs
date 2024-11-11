@@ -110,7 +110,7 @@ namespace TestTDD
             Point res;
             if (movements == "r")
             {
-                var newDirection = directions.ElementAt(directions.IndexOf(startPoint.Direction));
+                var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
                 res = new Point(startPoint.x, startPoint.y, newDirection);
             }
             else
