@@ -27,6 +27,8 @@ namespace TestTDD
         }
         [Theory]
         [InlineData(3, 3, 0)]
+        [InlineData(0, 0, 0)]
+        [InlineData(10, 10, 0)]
         public void MoveNorthOncefromTheEdge(int startX, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, 20), 'N', "f");
@@ -40,6 +42,10 @@ namespace TestTDD
         {
             if ((startPoint, direction, movements) == (new Point(3, 20), 'N', "f"))
                 return new Point(3, 0);
+            if ((startPoint, direction, movements) == (new Point(0, 20), 'N', "f"))
+                return new Point(0, 0);
+            if ((startPoint, direction, movements) == (new Point(10, 20), 'N', "f"))
+                return new Point(10, 0);
             var res = startPoint.MoveNorth();
             return res;
         }
