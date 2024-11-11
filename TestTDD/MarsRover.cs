@@ -92,6 +92,8 @@ namespace TestTDD
         [Theory]
         [InlineData(0, 0, 'S', 0, 1)]
         [InlineData(0, 0, 'N', 0, 20)]
+        [InlineData(0, 0, 'W', 1, 0)]
+        [InlineData(0, 0, 'E', 10, 0)]
         public void MoveWestOnceBackwards(int startX, int startY, char direction, int endX, int endY)
         {
             var res = MarsRover.Move(new Point(startX, startY, direction), "b");
