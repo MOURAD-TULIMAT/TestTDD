@@ -94,9 +94,9 @@ namespace TestTDD
         [InlineData(0, 0, 'W', 3, 8, 0)]
         [InlineData(0, 0, 'E', 3, 3, 0)]
         [InlineData(0, 0, 'E', 15, 4, 0)]
-        [InlineData(0, 0, 'E', 30, 8, 0)] 
-        [InlineData(0, 0, 'W', 30, 3, 0)] 
-        [InlineData(0, 0, 'S', 60, 0, 3)] 
+        [InlineData(0, 0, 'E', 30, 8, 0)]
+        [InlineData(0, 0, 'W', 30, 3, 0)]
+        [InlineData(0, 0, 'S', 60, 0, 3)]
         [InlineData(5, 5, 'S', 54, 5, 14)]
         [InlineData(0, 0, 'W', 100, 10, 0)]
         [InlineData(0, 0, 'S', 64, 0, 20)]
@@ -144,11 +144,11 @@ namespace TestTDD
         }
         internal Point MoveSouth(int count)
         {
-            return new Point(x, (y - count + 21 * 3) % 21);
+            return new Point(x, (((y - count) % 21) + 21) % 21);
         }
         internal Point MoveWest(int count)
         {
-            return new Point((x - count + 11 * 3) % 11, y);
+            return new Point((((x - count) % 11) + 11) % 11, y);
         }
     }
 }
