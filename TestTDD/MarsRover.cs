@@ -99,6 +99,16 @@ namespace TestTDD
             var res = MarsRover.Move(new Point(0, 0, direction), "r");
             res.Should().Be(new Point(0, 0, expected));
         }
+        [Theory]
+        [InlineData('N', 'W')]
+        [InlineData('E', 'N')]
+        [InlineData('S', 'E')]
+        [InlineData('W', 'S')]
+        public void TestRotatingToTheLeft(char direction, char expected)
+        {
+            var res = MarsRover.Move(new Point(0, 0, direction), "l");
+            res.Should().Be(new Point(0, 0, expected));
+        }
     }
 
     public class MarsRover
@@ -111,6 +121,11 @@ namespace TestTDD
             if (movements == "r")
             {
                 var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
+                res = new Point(startPoint.x, startPoint.y, newDirection);
+            }
+            else if (movements == "l")
+            {
+                var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) - 1 + 4) % 4);
                 res = new Point(startPoint.x, startPoint.y, newDirection);
             }
             else
