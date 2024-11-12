@@ -166,13 +166,7 @@ namespace TestTDD
         private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
         public static Point Move(Point startPoint, string movements)
         {
-            if (startPoint.Direction == 'w')
-                throw new ArgumentException();
-            if (startPoint.Direction == 'e')
-                throw new ArgumentException();
-            if (startPoint.Direction == 'n')
-                throw new ArgumentException();
-            if (startPoint.Direction == 's')
+            if (!directions.Contains(startPoint.Direction))
                 throw new ArgumentException();
             Point res = startPoint;
             foreach (var move in movements)
