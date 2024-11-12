@@ -139,22 +139,22 @@ namespace TestTDD
         private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
         public static Point Move(Point startPoint, string movements)
         {
-            Point res = new Point(0, 0, 'N');
+            Point res = startPoint;
             foreach (var move in movements)
             {
                 if (move == 'r')
                 {
-                    var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
-                    res = new Point(startPoint.X, startPoint.Y, newDirection);
+                    var newDirection = directions.ElementAt((directions.IndexOf(res.Direction) + 1) % 4);
+                    res = new Point(res.X, res.Y, newDirection);
                 }
                 else if (move == 'l')
                 {
-                    var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) - 1 + 4) % 4);
-                    res = new Point(startPoint.X, startPoint.Y, newDirection);
+                    var newDirection = directions.ElementAt((directions.IndexOf(res.Direction) - 1 + 4) % 4);
+                    res = new Point(res.X, res.Y, newDirection);
                 }
                 else
                 {
-                    res = startPoint.MoveInDirection(move == 'b');
+                    res = res.MoveInDirection(move == 'b');
                 }
             }
 
