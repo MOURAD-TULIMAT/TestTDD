@@ -126,6 +126,13 @@ namespace TestTDD
         [InlineData(0, 0, 'W', "rf", 0, 1, 'N')]
         [InlineData(0, 0, 'N', "rf", 1, 0, 'E')]
         [InlineData(0, 0, 'N', "rl", 0, 0, 'N')]
+        [InlineData(0, 0, 'N', "lr", 0, 0, 'N')]
+        [InlineData(0, 0, 'N', "ff", 0, 2, 'N')]
+        [InlineData(0, 0, 'N', "bb", 0, 19, 'N')]
+        [InlineData(0, 0, 'E', "ff", 2, 0, 'E')]
+        [InlineData(0, 0, 'E', "bb", 9, 0, 'E')]
+        [InlineData(0, 0, 'W', "bb", 2, 0, 'W')]
+        [InlineData(0, 0, 'W', "ff", 9, 0, 'W')]
         public void TwoMovements(int startX, int startY, char direction, string movements, int endX, int endY, char endDirection)
         {
             var res = MarsRover.Move(new Point(startX, startY, direction), movements);
