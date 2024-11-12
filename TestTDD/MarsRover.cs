@@ -161,6 +161,8 @@ namespace TestTDD
         }
         [Theory]
         [InlineData(0, 0, 'W', "x")]
+        [InlineData(0, 0, 'W', "fx")]
+        [InlineData(0, 0, 'W', "flF")]
         public void WrongMovementsInput(int startX, int startY, char direction, string movements)
         {
             Assert.Throws<ArgumentException>(() => MarsRover.Move(new Point(startX, startY, direction), movements));
@@ -175,6 +177,14 @@ namespace TestTDD
             if (!directions.Contains(startPoint.Direction))
                 throw new ArgumentException();
             if(movements == "x")
+            {
+                throw new ArgumentException();
+            }
+            if(movements == "fx")
+            {
+                throw new ArgumentException();
+            }
+            if (movements == "flF")
             {
                 throw new ArgumentException();
             }
