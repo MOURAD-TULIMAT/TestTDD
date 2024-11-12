@@ -139,32 +139,23 @@ namespace TestTDD
         private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
         public static Point Move(Point startPoint, string movements)
         {
-            Point res;
-            if (startPoint == new Point(0, 0, 'W') && movements == "rf")
+            Point res = new Point(0, 0, 'N');
+            foreach (var move in movements)
             {
-                return new Point(0, 1, 'N');
-            }
-            if (startPoint == new Point(0, 0, 'N') && movements == "rf")
-            {
-                return new Point(1, 0, 'E');
-            }
-            if (startPoint == new Point(0, 0, 'N') && movements == "rl")
-            {
-                return new Point(0, 0, 'N');
-            }
-            if (movements == "r")
-            {
-                var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
-                res = new Point(startPoint.X, startPoint.Y, newDirection);
-            }
-            else if (movements == "l")
-            {
-                var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) - 1 + 4) % 4);
-                res = new Point(startPoint.X, startPoint.Y, newDirection);
-            }
-            else
-            {
-                res = startPoint.MoveInDirection(movements[0] == 'b');
+                if (move == 'r')
+                {
+                    var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) + 1) % 4);
+                    res = new Point(startPoint.X, startPoint.Y, newDirection);
+                }
+                else if (move == 'l')
+                {
+                    var newDirection = directions.ElementAt((directions.IndexOf(startPoint.Direction) - 1 + 4) % 4);
+                    res = new Point(startPoint.X, startPoint.Y, newDirection);
+                }
+                else
+                {
+                    res = startPoint.MoveInDirection(move == 'b');
+                }
             }
 
             return res;
