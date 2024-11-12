@@ -133,12 +133,23 @@ namespace TestTDD
         [InlineData(0, 0, 'E', "bb", 9, 0, 'E')]
         [InlineData(0, 0, 'W', "bb", 2, 0, 'W')]
         [InlineData(0, 0, 'W', "ff", 9, 0, 'W')]
+        [InlineData(0, 0, 'S', "bb", 0, 2, 'S')]
+        [InlineData(0, 0, 'S', "ff", 0, 19, 'S')]
         public void TwoMovements(int startX, int startY, char direction, string movements, int endX, int endY, char endDirection)
         {
             var res = MarsRover.Move(new Point(startX, startY, direction), movements);
             res.Should().Be(new Point(endX, endY, endDirection));
         }
-
+        [Theory]
+        [InlineData(0, 0, 'W', "rfl", 0, 1, 'W')]
+        [InlineData(0, 0, 'N', "rfl", 1, 0, 'N')]
+        [InlineData(0, 0, 'N', "rlf", 0, 1, 'N')]
+        [InlineData(0, 0, 'N', "lrf", 0, 1, 'N')]
+        public void ThreeMovements(int startX, int startY, char direction, string movements, int endX, int endY, char endDirection)
+        {
+            var res = MarsRover.Move(new Point(startX, startY, direction), movements);
+            res.Should().Be(new Point(endX, endY, endDirection));
+        }
     }
 
     public class MarsRover
