@@ -155,7 +155,13 @@ namespace TestTDD
         [InlineData(0, 0, 'e', "f")]
         [InlineData(0, 0, 'n', "f")]
         [InlineData(0, 0, 's', "f")]
-        public void WrongInput(int startX, int startY, char direction, string movements)
+        public void WrongDirectionInput(int startX, int startY, char direction, string movements)
+        {
+            Assert.Throws<ArgumentException>(() => MarsRover.Move(new Point(startX, startY, direction), movements));
+        }
+        [Theory]
+        [InlineData(0, 0, 'W', "x")]
+        public void WrongMovementsInput(int startX, int startY, char direction, string movements)
         {
             Assert.Throws<ArgumentException>(() => MarsRover.Move(new Point(startX, startY, direction), movements));
         }
@@ -168,6 +174,10 @@ namespace TestTDD
         {
             if (!directions.Contains(startPoint.Direction))
                 throw new ArgumentException();
+            if(movements == "x")
+            {
+                throw new ArgumentException();
+            }
             Point res = startPoint;
             foreach (var move in movements)
             {
