@@ -110,6 +110,7 @@ namespace TestTDD
             var res = MarsRover.Move(new Point(0, 0, direction), "r");
             res.Should().Be(new Point(0, 0, expected));
         }
+
         [Theory]
         [InlineData('N', 'W')]
         [InlineData('E', 'N')]
@@ -123,6 +124,8 @@ namespace TestTDD
 
         [Theory]
         [InlineData(0, 0, 'W', "rf", 0, 1, 'N')]
+        [InlineData(0, 0, 'N', "rf", 1, 0, 'E')]
+        [InlineData(0, 0, 'N', "rl", 0, 0, 'N')]
         public void TwoMovements(int startX, int startY, char direction, string movements, int endX, int endY, char endDirection)
         {
             var res = MarsRover.Move(new Point(startX, startY, direction), movements);
@@ -140,6 +143,14 @@ namespace TestTDD
             if (startPoint == new Point(0, 0, 'W') && movements == "rf")
             {
                 return new Point(0, 1, 'N');
+            }
+            if (startPoint == new Point(0, 0, 'N') && movements == "rf")
+            {
+                return new Point(1, 0, 'E');
+            }
+            if (startPoint == new Point(0, 0, 'N') && movements == "rl")
+            {
+                return new Point(0, 0, 'N');
             }
             if (movements == "r")
             {
