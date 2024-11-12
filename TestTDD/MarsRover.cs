@@ -150,6 +150,12 @@ namespace TestTDD
             var res = MarsRover.Move(new Point(startX, startY, direction), movements);
             res.Should().Be(new Point(endX, endY, endDirection));
         }
+        [Theory]
+        [InlineData(0, 0, 'w', "f")]
+        public void WrongInput(int startX, int startY, char direction, string movements)
+        {
+            Assert.Throws<ArgumentException>(() => MarsRover.Move(new Point(startX, startY, direction), movements));
+        }
     }
 
     public class MarsRover
@@ -157,6 +163,8 @@ namespace TestTDD
         private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
         public static Point Move(Point startPoint, string movements)
         {
+            if (startPoint.Direction == 'w')
+                throw new ArgumentException();
             Point res = startPoint;
             foreach (var move in movements)
             {
