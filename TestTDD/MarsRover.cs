@@ -171,34 +171,25 @@ namespace TestTDD
 
     public class MarsRover
     {
-        private static readonly List<char> directions = ['N', 'E', 'S', 'W'];
+        private static readonly List<char> Directions = ['N', 'E', 'S', 'W'];
+        private static readonly List<char> AllowedMovements = ['f', 'b', 'l', 'r'];
         public static Point Move(Point startPoint, string movements)
         {
-            if (!directions.Contains(startPoint.Direction))
+            if (!Directions.Contains(startPoint.Direction))
                 throw new ArgumentException();
-            if(movements == "x")
-            {
-                throw new ArgumentException();
-            }
-            if(movements == "fx")
-            {
-                throw new ArgumentException();
-            }
-            if (movements == "flF")
-            {
-                throw new ArgumentException();
-            }
             Point res = startPoint;
             foreach (var move in movements)
             {
+                if (!AllowedMovements.Contains(move))
+                    throw new ArgumentException();
                 if (move == 'r')
                 {
-                    var newDirection = directions.ElementAt((directions.IndexOf(res.Direction) + 1) % 4);
+                    var newDirection = Directions.ElementAt((Directions.IndexOf(res.Direction) + 1) % 4);
                     res = new Point(res.X, res.Y, newDirection);
                 }
                 else if (move == 'l')
                 {
-                    var newDirection = directions.ElementAt((directions.IndexOf(res.Direction) - 1 + 4) % 4);
+                    var newDirection = Directions.ElementAt((Directions.IndexOf(res.Direction) - 1 + 4) % 4);
                     res = new Point(res.X, res.Y, newDirection);
                 }
                 else
